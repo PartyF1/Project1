@@ -1,0 +1,15 @@
+﻿"Lab 6.14.exe" (Win32). Загружено "C:\Users\Некит пидор\Desktop\C++\Lab 1\PPP\Project1\Debug\Lab 6.14.exe". Символы загружены.
+"Lab 6.14.exe" (Win32). Загружено "C:\Windows\SysWOW64\ntdll.dll". 
+"Lab 6.14.exe" (Win32). Загружено "C:\Windows\SysWOW64\kernel32.dll". 
+"Lab 6.14.exe" (Win32). Загружено "C:\Windows\SysWOW64\KernelBase.dll". 
+"Lab 6.14.exe" (Win32). Загружено "C:\Windows\SysWOW64\msvcp140d.dll". 
+"Lab 6.14.exe" (Win32). Загружено "C:\Windows\SysWOW64\vcruntime140d.dll". 
+"Lab 6.14.exe" (Win32). Загружено "C:\Windows\SysWOW64\ucrtbased.dll". 
+Поток 0x1b74 завершился с кодом 0 (0x0).
+"Lab 6.14.exe" (Win32). Загружено "C:\Windows\SysWOW64\sechost.dll". 
+"Lab 6.14.exe" (Win32). Загружено "C:\Windows\SysWOW64\rpcrt4.dll". 
+"Lab 6.14.exe" (Win32). Загружено "C:\Windows\SysWOW64\kernel.appcore.dll". 
+"Lab 6.14.exe" (Win32). Загружено "C:\Windows\SysWOW64\msvcrt.dll". 
+Поток 0x3384 завершился с кодом 0 (0x0).
+Поток 0x3d74 завершился с кодом 0 (0x0).
+Программа "[20592] Lab 6.14.exe" завершилась с кодом 0 (0x0).
