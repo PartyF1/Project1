@@ -9,7 +9,6 @@
 #include <time.h>
 using namespace std;
 
-
 struct List
 {
 	int info;
@@ -95,15 +94,7 @@ void PalyCheck(List* head, List* tail, int n)
 	while (p != tail) 
 	{
 		List* p1;
-		int temp = p->info;
-		if (p->pred == head) {
-			p1 = p->next;
-			head->next = p1;
-			p1->pred = head;
-		}
-		else {
-			p1 = RemoveElement(p);
-		}
+		p1 = RemoveElement(p);
 		if (itsPaly(head, tail, n/2))
 		{
 			cout << "Данная строка станет палиндромом при удалении элемента " << p->info << " с индексом " << index << endl;
