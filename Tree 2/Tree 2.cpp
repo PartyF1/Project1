@@ -11,10 +11,27 @@
 д) удаление начисления по ключу;
 е) построение другого бинарного дерева поиска, ключом которого является табельный номер, 
 и выдача списка начисления, упорядоченного по табельным номерам.*/
+#include <windows.h>
 
-#include <iostream>
+#include "WorkerSBTree.h"
 
 int main()
 {
-    
+	// Локализация по кириллице
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	setlocale(LC_ALL, "Russian");
+
+	WorkerSBTree dataBase;
+	dataBase.insert(*new Worker(2, 3, 4, 5, 6));
+
+	dataBase.insert(*new Worker(1, 2, 3, 4, 5));
+
+	
+
+	cout << dataBase;
+
+	Key key;
+	cin >> key;
+	cout << (dataBase.search(key));   
 }
