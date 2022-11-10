@@ -6,15 +6,19 @@ using namespace std;
 struct Key
 {
 	string type;
+	bool uniq;
 	int value;
 
 	Key(string type, int value) {
 		this->type = type;
 		this->value = value;
+		if (type == "idP" || type == "tableNum") this->uniq = true;
+		else this->uniq = false;
 	}
 	Key() {
 		this->type = "";
 		this->value = NULL;
+		this->uniq = false;
 	}
 
 	friend istream& operator>>(istream& cin, Key& key) {
@@ -29,7 +33,7 @@ struct Key
 		cin >> input;
 		switch (input)
 		{
-		case 1: key.type = "idP"; break;
+		case 1: key.type = "idP";  key.uniq = true; break;
 		case 2: key.type = "tabelNum"; break;
 		case 3:	key.type = "month"; break;
 		case 4: key.type = "year"; break;

@@ -6,6 +6,7 @@ private:
 	struct WorkerNode {
 		Worker worker;
 		WorkerNode* left, * right;
+		int num;
 		WorkerNode(Worker worker, WorkerNode* left, WorkerNode* right) {
 			this->worker = worker;
 			this->left = left;
@@ -23,14 +24,14 @@ public:
 	WorkerSBTree();
 	~WorkerSBTree();
 
-	bool insert(Worker& worker);
+	bool insert(Worker& worker, Key key);
 
-	bool insertWorker(WorkerNode*& root, Worker& worker);
+	bool insertWorker(WorkerNode*& root, Worker& worker, Key key, int num);
 
 	Worker& search(Key key);
 
 	// Рекурсивная функция поиска в дереве с корнем root вершины с ключом key
-	Worker& searchWorker(WorkerNode*& root, Key key);
+	bool searchWorker(WorkerNode*& root, Key key, Worker & worker);
 
 	// Удаление в дереве вершины по ключу key 
 	// Возвращает 

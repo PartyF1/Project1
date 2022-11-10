@@ -18,18 +18,10 @@ Worker::Worker(Worker& worker)
 	this->salary = worker.salary;
 }
 
+
 Worker::Worker(int tabelNum, int month, int year, int salary)
 {
-	this->idP = NULL;
-	this->tabelNum = tabelNum;
-	this->month = month;
-	this->year = year;
-	this->salary = salary;
-}
-
-Worker::Worker(int idP, int tabelNum, int month, int year, int salary)
-{
-	this->idP = idP;
+	this->idP = 1;
 	this->tabelNum = tabelNum;
 	this->month = month;
 	this->year = year;
@@ -73,6 +65,16 @@ int Worker::get(string key)
 	else if (key == "salary") {
 		return salary;
 	}
+}
+
+void Worker::setIdP()
+{
+	this->idP++;
+}
+
+void Worker::setIdP(int idP)
+{
+	this->idP = idP;
 }
 
 

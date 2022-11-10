@@ -11,12 +11,13 @@ WorkerSBTree::~WorkerSBTree()
 	clear();
 }
 
-bool WorkerSBTree::insert(Worker& worker)
+bool WorkerSBTree::insert(Worker& worker, Key key)
 {
-	return insertWorker(root, worker);
+	int num = 1;
+	return insertWorker(root, worker, key, num);
 }
 
-bool WorkerSBTree::insertWorker(WorkerNode*& root, Worker& worker)
+bool WorkerSBTree::insertWorker(WorkerNode*& root, Worker& worker, Key key, int num)
 {
 	if (root == nullptr)
 	{
@@ -24,36 +25,65 @@ bool WorkerSBTree::insertWorker(WorkerNode*& root, Worker& worker)
 		return true;
 	}
 	else
-	{
-		if (worker.get("idP") < root->worker.get("idP"))
-			return insertWorker(root->left, worker);
-		else
-			if (worker.get("idP") > root->worker.get("idP"))
-				return insertWorker(root->right, worker);
+	{		
+		
+		if (!key.uniq) {
+			worker.setIdP(num);
+			if (worker.get(key) == root->worker.get(key)) {
+				return insertWorker(root->left, worker, key, num);
+			}
 			else
-				return false;
+				if (worker.get(key) > root->worker.get(key)) {
+					return insertWorker(root->left, worker, key, num);
+				}
+				else if (worker.get(key) < root->worker.get(key)) {
+					return insertWorker(root->right, worker, key, num);
+				}
+				else {
+					
+					return false;
+				}
+			
+		}			
+		else {
+			worker.setIdP();
+			if (worker.get(key) < root->worker.get(key)) {
+				return insertWorker(root->left, worker, key, num);
+			}
+			else
+				if (worker.get(key) > root->worker.get(key)) {
+					return insertWorker(root->right, worker, key, num);
+				}
+				else
+					return false;
+			
+		}		
 	}
 }
 
 Worker& WorkerSBTree::search(Key key)
 {	
-	return searchWorker(root, key);
+	Worker a;
+	searchWorker(root, key, a);
+	return a;
 }
 
-Worker& WorkerSBTree::searchWorker(WorkerNode*& root, Key key)
+bool WorkerSBTree::searchWorker(WorkerNode*& root, Key key, Worker & worker)
 {	
 	if (root != nullptr)
 	{
 		if (root->worker.get(key) == key.value)
 		{
-			return root->worker;
+			worker = root->worker;
+			return true;
 		}
 		else
 			if (key.value < root->worker.get(key))
-				searchWorker(root->left, key);
+				searchWorker(root->left, key, worker);
 			else
-				searchWorker(root->right, key);
+				searchWorker(root->right, key, worker);
 	}
+	return false;
 }
 
 void  WorkerSBTree::del(WorkerNode*& r, WorkerNode*& delnode)
