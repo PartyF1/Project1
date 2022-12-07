@@ -55,7 +55,7 @@ void Menu(WorkerSBTree dataBase) {
 			break;
 		}
 		case(4): {
-			autoInserter()
+			//autoInserter();
 		}
 		default:
 			break;

@@ -48,11 +48,6 @@ int Worker::get(string key)
 	}
 }
 
-void Worker::setIdP()
-{
-	this->idP++;
-}
-
 void Worker::setIdP(int idP)
 {
 	this->idP = idP;

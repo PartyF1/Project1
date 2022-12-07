@@ -1,12 +1,13 @@
 #pragma once
 #include "Worker.h"
+#include <list>
 class WorkerSBTree
 {
 private:
 	struct WorkerNode {
 		Worker worker;
 		WorkerNode* left, * right;
-		
+
 		WorkerNode(Worker worker, WorkerNode* left, WorkerNode* right) {
 			this->worker = worker;
 			this->left = left;
@@ -24,23 +25,31 @@ public:
 	WorkerSBTree();
 	~WorkerSBTree();
 
-	bool insert(Worker& worker, Key key);
+	bool insert(Worker& worker, string key);
 
-	bool insertWorker(WorkerNode*& root, Worker& worker, Key key);
+	bool insertWorker(WorkerNode*& root, Worker& worker, string key);
 
-	Worker& search(Key key);
+	Worker& search(string key, int value);
+
+	void newBase(WorkerSBTree& tabelBase);
+
+	void newBaseByTabelNum(WorkerNode*& root ,WorkerSBTree& tabelBase);
 
 	// Рекурсивная функция поиска в дереве с корнем root вершины с ключом key
-	bool searchWorker(WorkerNode*& root, Key key, Worker & worker);
+	bool searchWorker(WorkerNode*& root, string key, int value, Worker& worker);
+
+	void searchList(int value, list<Worker*>& workers);
+
+	void searchSalaries(WorkerNode*& root, int value, list<Worker*>& workers);
 
 	// Удаление в дереве вершины по ключу key 
 	// Возвращает 
 	//   true в случае успешного удаления вершины;
 	//   false, если вершина дерева с таким ключом в дереве отсутствует.	
-	bool  erase(Key key);
+	bool  erase(int key);
 
 	// Рекурсивная функция поиска и удаления в дереве с корнем root вершины с ключом key
-	bool  eraseWorker(WorkerNode*& root, Key key);
+	bool  eraseWorker(WorkerNode*& root, int key);
 
 	// Вспомогательная функция удаления вершины из БДП. 
 	//Применяется в случае удаления вершины с двумя поддеревьями

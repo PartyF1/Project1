@@ -15,8 +15,6 @@ public:
 	Worker(int tabelNum, int month, int year, int salary);
 
 	int get(string key);
-
-	void setIdP();
 	void setIdP(int idP);
 
 	friend ostream& operator<<(ostream& cout, Worker& worker);

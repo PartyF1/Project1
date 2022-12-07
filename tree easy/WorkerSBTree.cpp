@@ -1,4 +1,5 @@
 #include "WorkerSBTree.h"
+#include <iostream>
 
 WorkerSBTree::WorkerSBTree()
 {
@@ -11,12 +12,12 @@ WorkerSBTree::~WorkerSBTree()
 	clear();
 }
 
-bool WorkerSBTree::insert(Worker& worker, Key key)
+bool WorkerSBTree::insert(Worker& worker, string key)
 {
 	return insertWorker(root, worker, key);
 }
 
-bool WorkerSBTree::insertWorker(WorkerNode*& root, Worker& worker, Key key)
+bool WorkerSBTree::insertWorker(WorkerNode*& root, Worker& worker, string key)
 {
 	if (root == nullptr)
 	{
@@ -26,42 +27,73 @@ bool WorkerSBTree::insertWorker(WorkerNode*& root, Worker& worker, Key key)
 		return true;
 	}
 	else
-	{			
+	{
 		if (worker.get(key) >= root->worker.get(key)) {
 			return insertWorker(root->left, worker, key);
 		}
 		else if (worker.get(key) <= root->worker.get(key)) {
 			return insertWorker(root->right, worker, key);
 		}
-		else {		
+		else {
 			return false;
-		}		
+		}
 	}
 }
 
-Worker& WorkerSBTree::search(Key key)
-{	
+Worker& WorkerSBTree::search(string key, int value)
+{
 	Worker a;
-	searchWorker(root, key, a);
+	searchWorker(root, key, value, a);
 	return a;
 }
 
-bool WorkerSBTree::searchWorker(WorkerNode*& root, Key key, Worker & worker)
-{	
+void WorkerSBTree::newBase(WorkerSBTree& tabelBase) {
+	return newBaseByTabelNum(root, tabelBase);
+}
+
+void WorkerSBTree::newBaseByTabelNum(WorkerNode*& root ,WorkerSBTree& tabelBase) {
+	if (root != nullptr) {
+		tabelBase.insert(root->worker, "tabelNum");
+		newBaseByTabelNum(root->left, tabelBase);
+		newBaseByTabelNum(root->right, tabelBase);
+	}
+}
+
+bool WorkerSBTree::searchWorker(WorkerNode*& root, string key, int value,  Worker& worker)
+{
 	if (root != nullptr)
 	{
-		if (root->worker.get(key) == key.value)
+		if (root->worker.get(key) == value)
 		{
 			worker = root->worker;
 			return true;
 		}
 		else
-			if (key.uniq? key.value > root->worker.get(key) : key.value < root->worker.get(key))
-				searchWorker(root->left, key, worker);
+			if (value < root->worker.get(key))
+				searchWorker(root->left, key, value, worker);
 			else
-				searchWorker(root->right, key, worker);
+				searchWorker(root->right, key, value, worker);
 	}
 	return false;
+}
+
+void WorkerSBTree::searchList(int value, list<Worker*>& workers) {
+	searchSalaries(root, value, workers);
+}
+
+void WorkerSBTree::searchSalaries(WorkerNode*& root, int value, list<Worker*>& workers)
+{
+	if (root != nullptr)
+	{
+		if (root->worker.get("tabelNum") == value)
+		{
+			workers.push_back(new Worker(root->worker));
+			searchSalaries(root->left, value, workers);
+		}
+		else
+			searchSalaries(root->left, value, workers);
+			searchSalaries(root->right, value, workers);
+	}
 }
 
 void  WorkerSBTree::del(WorkerNode*& r, WorkerNode*& delnode)
@@ -95,12 +127,12 @@ void WorkerSBTree::clearSBTree(WorkerNode* root)
 	return;
 }
 
-bool WorkerSBTree::erase(Key key)
+bool WorkerSBTree::erase(int key)
 {
 	return eraseWorker(root, key);
 }
 
-bool WorkerSBTree::eraseWorker(WorkerNode*& root, Key key)
+bool WorkerSBTree::eraseWorker(WorkerNode*& root, int key)
 {
 	//void DeleteNode(TreeNode * &p, int k)
 	{
@@ -110,10 +142,10 @@ bool WorkerSBTree::eraseWorker(WorkerNode*& root, Key key)
 			return false;
 		else
 		{
-			if (key.value < root->worker.get(key))
+			if (key < root->worker.get("idP"))
 				return eraseWorker(root->left, key);
 			else
-				if (key.value > root->worker.get(key))
+				if (key > root->worker.get("idP"))
 					return eraseWorker(root->right, key);
 				else
 				{
