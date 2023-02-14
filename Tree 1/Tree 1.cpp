@@ -19,6 +19,10 @@ TreeNode* makeTree(int level);
 void printTree(TreeNode*& root, const int level = 0);
 void sumOfPredoks(TreeNode* root, vector<int>& sums, int sum = 0);
 void printSum(vector<int> arr);
+int minValue(TreeNode* root, int min = INT16_MAX);
+
+
+
 
 int main()
 {
@@ -30,11 +34,15 @@ int main()
 
 	cout << "Введенное дерево:" << endl;
 	printTree(root);
+	/*
 	sumOfPredoks(root, sums);
-
+	
 	cout << "Сумма предков вершин дерева слева направо:" << endl;
-	printSum(sums);
+	printSum(sums);*/
+
+	cout << minValue(root);
 }
+
 
 // Создание бинарного дерева вводом с клавиатуры
 TreeNode* makeTree(int level)
@@ -60,6 +68,17 @@ TreeNode* makeTree(int level)
 
 
 }
+
+int minValue(TreeNode* root, int min) {
+	if (root != nullptr) {
+		int tempMin = minValue(root->left, root->info);
+		min = tempMin < min ? tempMin : min;
+		tempMin = minValue(root->right, min);
+		min = tempMin < min ? tempMin : min;
+	}
+	return min;
+}
+
 
 
 // Вывод бинарного дерева на консоль
