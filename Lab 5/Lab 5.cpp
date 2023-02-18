@@ -12,6 +12,7 @@
 #include <list>
 using namespace std;
 
+//В списке people проверяет, остаётся ли k-ый номер, если удалять каждого m-ого
 int kill(list<int> people, int m, int k) {
     auto it = people.begin();
     int count = 1;
@@ -42,6 +43,8 @@ int kill(list<int> people, int m, int k) {
     }
 }
 
+
+//Вычисляет выводит все возможное варианты, когда в списке people после применения считалки Иосифа может остаться k-ый член
 void Joseph(list<int> people, int k) {
     bool find = false;
     for (int m = 1; m <= people.size(); m++) {
@@ -65,11 +68,11 @@ int main()
     cin >> n;
     cout << endl << "Какой номер должен выжить?" << endl;
     cin >> k;
-    list<int> a;
+    list<int> people;
 
     for (int i = 0; i < n; i++) {
-        a.push_back(i+1);
+        people.push_back(i+1);
     }
 
-    Joseph(a, k);
+    Joseph(people, k);
 }
