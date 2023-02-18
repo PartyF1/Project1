@@ -5,31 +5,26 @@
 {1, 2}, {1, 3}, {2, 3}, {1, 2, 3}}. А сколько всего таких сочетаний?
 */
 
-
+#include <iostream>
 #include "Lab 6.h"
 
-
-void getCombinations(set<set<int>>& combinations, int n) {
-    for (int i = 1; i <= n; i++) {
-        int m = i;
-        while (m <= n) {
-            set<int> a;
-            a.insert(i);
-            a.insert(m);
-            combinations.insert(a);
-            for (int j = m; j > i; j--) {
-                a.insert(j);
-                combinations.insert(a);
+//Функция генерирует комбинации элементов с 1 до n
+set<set<int>> getCombinations(int n) {
+    set<set<int>> combinations;
+    int count = 1 << n;
+    for (int i = 0; i < count; i++) {
+        set<int> combination;
+        for (int j = 0; j < n; j++) {
+            if (i & (1 << j)) {
+                combination.insert(j + 1);
             }
-            for (int j = n; j > i; j--) {
-                a.insert(j);
-                combinations.insert(a);
-            }
-            m++;
         }
+        combinations.insert(combination);
     }
+    return combinations;
 }
 
+//Выводит сгенерированный набор комбинаций и их количество в консоль
 void printCombinations(set<set<int>> combinations) {
     for (auto combination : combinations) {
         cout << "{";
@@ -45,13 +40,9 @@ int main()
 {
     setlocale(LC_ALL, "ru");
     int n;
-    set<set<int>> combinations;
-
     cout << "Введите значение n: ";
     cin >> n;
-
-    getCombinations(combinations, n);
-    printCombinations(combinations);
+    printCombinations(getCombinations(n));
 
     system("pause");
 }
